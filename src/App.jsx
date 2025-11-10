@@ -1,14 +1,26 @@
-import Member1 from "./component/Member1"
-
-function App() {  
+function MyPage() {
   return (
     <div>
-      <Member1 name='LG 트윈스' rank="1"/>
-      <Member1 name='한화 이글스' rank="2" />
-      <Member1 name='삼성 라이온스' rank="3" />
+      내 정보입니다
     </div>
-  )
+  );
+}
+
+function AuthWrapper({children, isLogin}) {
+  if (!isLogin) {
+    return <div>로그인페이지로 이동하는 로직</div>
+  }
+  
+  return <>{children}</>;
 }
 
 
-export default App
+function App() {
+  return (
+    <AuthWrapper>
+      <MyPage />
+    </AuthWrapper>
+  )
+}
+
+export default App;
