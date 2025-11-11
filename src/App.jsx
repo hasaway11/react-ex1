@@ -1,26 +1,22 @@
-function MyPage() {
-  return (
-    <div>
-      내 정보입니다
-    </div>
-  );
-}
-
-function AuthWrapper({children, isLogin}) {
-  if (!isLogin) {
-    return <div>로그인페이지로 이동하는 로직</div>
-  }
-  
-  return <>{children}</>;
-}
-
+import { useState } from 'react'
+import FruitItem2 from './component/FruitItem2';
 
 function App() {
+  const prices = { apple: 3000, banana: 1000, orange: 2000 };
+  const [fruits, setFruits] = useState({apple:0, banana:0, orange:0})
+
+  const total = fruits.apple * prices.apple + fruits.banana * prices.banana + fruits.orange * prices.orange;
+
   return (
-    <AuthWrapper>
-      <MyPage />
-    </AuthWrapper>
+    <div>
+      <FruitItem2 name="사과" count={fruits.apple} setter={setFruits} fruitKey="apple" />
+      <FruitItem2 name="바나나" count={fruits.banana} setter={setFruits} fruitKey="banana" />
+      <FruitItem2 name="오렌지" count={fruits.orange} setter={setFruits} fruitKey="orange" />
+      <div>
+        <span>총액:{total}원</span>
+      </div>
+    </div>
   )
 }
 
-export default App;
+export default App
