@@ -1,22 +1,22 @@
-import { useState } from 'react'
-import FruitItem2 from './component/FruitItem2';
+import { useEffect, useState } from "react"
 
 function App() {
-  const prices = { apple: 3000, banana: 1000, orange: 2000 };
-  const [fruits, setFruits] = useState({apple:0, banana:0, orange:0})
+  const [count, setCount] = useState(0);
 
-  const total = fruits.apple * prices.apple + fruits.banana * prices.banana + fruits.orange * prices.orange;
+  console.log("1. 렌더링 계산 시작");
+
+  useEffect(() => {
+    console.log("3. useEffect 실행 - 이제 DOM 조작 OK!");
+    document.title = `클릭 ${count}번`;
+  }, [count]);  // count가 변경될 때마다 실행
+
+  console.log("2. 렌더링 계산 끝");
 
   return (
-    <div>
-      <FruitItem2 name="사과" count={fruits.apple} setter={setFruits} fruitKey="apple" />
-      <FruitItem2 name="바나나" count={fruits.banana} setter={setFruits} fruitKey="banana" />
-      <FruitItem2 name="오렌지" count={fruits.orange} setter={setFruits} fruitKey="orange" />
-      <div>
-        <span>총액:{total}원</span>
-      </div>
-    </div>
-  )
+    <button onClick={() => setCount(count + 1)}>
+      클릭: {count}
+    </button>
+  );
 }
 
 export default App
