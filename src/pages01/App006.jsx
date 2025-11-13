@@ -1,4 +1,4 @@
-import Member2 from "./component/Member2"
+import Member2 from "../component/Member2"
 
 function App() {  
   const kbo = [

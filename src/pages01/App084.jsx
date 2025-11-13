@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import data from "./data";
+import data from "../data";
 
 function User({user, handleDelete}) {
   return (

@@ -1,6 +1,5 @@
-import { useEffect, useMemo, useRef, useState } from "react"
+import { useMemo, useRef, useState } from "react"
 
-// 이예제는 useMeme에 적절
 function App() {
   const [sal, setSal] = useState(0);
   const rate = useRef(0.033);
@@ -25,3 +24,12 @@ function App() {
 }
 
 export default App
+
+// useEffect와의 차이점
+// - useEffect는 렌더링이 끝난 다음 실행
+// - useMemo는 렌더링 과정 안에서 실행되어, 렌더링에 필요한 값을 즉시 계산하고 캐싱
+//   즉, “이 계산을 이번 렌더링에서 다시 수행해야 하는가?”를 렌더링 전에 판단
+
+// useMemo에서 API 통신을 한다면
+// - 렌더링 도중 API 호출하면, 그 결과가 다시 렌더링을 트리거
+// - side effect는 렌더링 도중 실행되면 안된다

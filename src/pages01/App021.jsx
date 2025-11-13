@@ -5,7 +5,7 @@
 // 5. 3 4 의 결과를 가지고 누가 이겼는지 승패를 따진다
 // 6. 승패 결과에 따라 테두리 색이 바뀐다
 
-import Item from "./component/Item"
+import Item from "../component/Item"
 import './App.css'
 
 function App() {

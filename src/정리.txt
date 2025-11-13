@@ -58,3 +58,33 @@
   b. 개발자: document.title 변경!  ← 렌더링 중 외부 조작!
   c. React: "어? 렌더링 계산하는데 왜 건드려?"
 - useEffect는 외부에 영향을 주는 곳 : "useEffect는 외부 시스템과 컴포넌트를 동기화하는 React Hook입니다"
+
+
+9. useEffect
+- 리액트는 재렌더링을 통해 UI를 출력
+- 재렌더링될 때마다 JS 코드 재실행
+- 초기화 또는 특정 조건에서만 JS 코드들을 실행하는 훅이 useEffect
+  JSX 생성(렌더링)을 제외한 모든 작업 = 사이드 이펙트
+- useEffect는 렌더링된 다음 실행되므로 적절한 guard가 필요하다
+
+10. useCallback 의존성 배열
+- 의존성 배열이 없으면 매번 새로 만들어지므로 useCallback 의미가 없다
+- []로 지정하면 최초 한번만 함수를 생성한다
+  handleCreate가 접근하는 값은 id, username, email, user인데 id와 user는 훅으로 최신값을 가져온다
+  username, email은 함수가 생성될 때의 값이 캐시되어 있다
+  useState, useRef, setState처럼 React가 안정된 참조를 보장하는 값은 의존성에 넣지 않아도 된다
+- 최신의 username, email에 접근하려면 [username, email]을 사용해야 한다
+
+useEffect : 값이 바뀌면 → 콜백 실행
+useCallback : 값이 바뀌면 → 새 함수 생성
+같은 문법 형태의 “의존성 배열”을 사용하지만 useEffect는 실행 조건을, useCallback은 재생성 조건을 제어한다는 점에서 개념이 다름
+
+11. 커스텀 훅
+- 상태와 관련 로직을 하나의 훅으로 묶음
+- 각 컴포넌트가 독립적으로 그 훅을 사용하면 서로 다른 상태 인스턴스를 갖는다
+
+12. zustand set 함수
+- 직접 객체 전달 (정적 갱신) : 이전 상태 참조없이 새로운 값을 그대로 덮어씀
+  set({ val: 1 });
+- 동적 갱신 : state라는 이름은 예약어는 아니지만, 이 함수의 첫 번째 인자에 자동으로 현재 상태 객체가 전달되기 때문에 관례적으로 state라고 부름
+  set((state) => ({ val: state.val + 1 }));

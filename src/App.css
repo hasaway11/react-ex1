@@ -34,3 +34,8 @@
 .lose {
   border:1px solid red;
 }
+
+.cart {
+  display: inline-block;
+  width: 100px;
+}

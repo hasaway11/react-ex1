@@ -1,4 +1,4 @@
-import Member from "./component/Broadcast";
+import Member from "../component/Broadcast";
 
 
 function App() {

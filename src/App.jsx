@@ -1,21 +1,65 @@
-import { useEffect, useState } from "react"
+import { useState } from "react";
+import { create } from "zustand";
+
+const useTodoStore = create((set) => ({
+  todos: [],
+  nextId: 1,
+
+  addTodo: (title) =>
+    set((state) => ({
+      todos: [...state.todos, { id: state.nextId, title, done: false }],
+      nextId: state.nextId + 1,
+    })),
+
+  toggleTodo: (id) =>
+    set((state) => ({
+      todos: state.todos.map((todo) =>todo.id === id ? { ...todo, done: !todo.done } : todo)
+    })),
+
+  removeTodo: (id) =>
+    set((state) => ({todos: state.todos.filter((todo) => todo.id !== id)})),
+}));
 
 function App() {
-  const [count, setCount] = useState(0);
+  const { todos, addTodo, toggleTodo, removeTodo } = useTodoStore();
+  const [title, setTitle] = useState('');
 
-  console.log("1. 렌더링 계산 시작");
-
-  useEffect(() => {
-    console.log("3. useEffect 실행 - 이제 DOM 조작 OK!");
-    document.title = `클릭 ${count}번`;
-  }, [count]);  // count가 변경될 때마다 실행
-
-  console.log("2. 렌더링 계산 끝");
+  const handleAdd = () => {
+    if (!title.trim()) return;
+    addTodo(title);
+    setTitle('');
+  };
 
   return (
-    <button onClick={() => setCount(count + 1)}>
-      클릭: {count}
-    </button>
+    <div>
+      <h2>Todo List</h2>
+      <div>
+        <input
+          type="text"
+          placeholder="할 일을 입력하세요"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+        />
+        <button onClick={handleAdd}>추가</button>
+      </div>
+
+      <ul>
+        {todos.map((todo) => (
+          <li key={todo.id}>
+            <span
+              style={{
+                textDecoration: todo.done ? 'line-through' : 'none',
+                cursor: 'pointer',
+              }}
+              onClick={() => toggleTodo(todo.id)}
+            >
+              {todo.id}. {todo.title}
+            </span>
+            <button onClick={() => removeTodo(todo.id)}>삭제</button>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }
 

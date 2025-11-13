@@ -1,4 +1,4 @@
-import users from "./data"
+import users from "../data"
 
 function User({ user }) {
   return (

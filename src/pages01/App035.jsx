@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import FruitItem2 from './component/FruitItem2';
+import FruitItem2 from '../component/FruitItem2';
 
 function App() {
   const prices = { apple: 3000, banana: 1000, orange: 2000 };

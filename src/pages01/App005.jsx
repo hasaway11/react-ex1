@@ -1,4 +1,4 @@
-import Member1 from "./component/Member1"
+import Member1 from "../component/Member1"
 
 function App() {  
   return (

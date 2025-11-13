@@ -1,24 +1,27 @@
-import { useRef, useState } from "react";
-import data from "./data";
 
-function User({user, handleDelete, handleToggle}) {
+import React, { useCallback, useRef, useState } from "react";
+import data from "../data";
+
+const User = React.memo(function User({user, handleDelete, handleToggle}) {
+  console.log("User")
   return (
     <div>
       <b style={{cursor:'pointer', color:user.active?'green':'black'}} onClick={()=>handleToggle(user.id)}>{user.username}</b> <span>({user.email})</span>
       <button onClick={()=>handleDelete(user.id)}>삭제</button>
     </div>
   );
-}
+});
 
-function UserList({users, handleDelete, handleToggle}) {
+const UserList=React.memo(function UserList({users, handleDelete, handleToggle}) {
   return (
     <div>
       { users.map(user=><User user={user} key={user.id} handleDelete={handleDelete} handleToggle={handleToggle}/>) }
     </div>
   );
-}
+});
 
-function CreateUser({handleChange, handleCreate}) {
+const CreateUser = React.memo(function CreateUser({handleChange, handleCreate}) {
+  console.log("CreateUser");
   return (
     <div>
       <input name="username" placeholder="계정명" onChange={handleChange}/>
@@ -26,27 +29,28 @@ function CreateUser({handleChange, handleCreate}) {
       <button onClick={handleCreate}>등록</button>
     </div>
   );
-}
+});
 
 function App() {
+  console.log("부모 렌더링");
   const nextId = useRef(4);
   const [users, setUsers] = useState(data);
   const [inputs, setInputs] = useState({username: '', email: ''});
   const { username, email } = inputs;
 
-  const handleChange=(e)=>{
+  const handleChange=useCallback((e)=>{
     const {name, value} = e.target;
     setInputs(prev=>({...prev, [name]:value}));
-  }
+  }, []);
 
-  const handleCreate=()=>{
+  const handleCreate=useCallback(()=>{
     const newUser = {id:nextId.current, username, email};
     setUsers(prev=>[...prev, newUser])
-  }
+  },[]);
 
-  const handleDelete=(id)=>setUsers(prev=>prev.filter(u=>u.id!==id));
+  const handleDelete=useCallback((id)=>setUsers(prev=>prev.filter(u=>u.id!==id)), []);
 
-  const handleToggle=(id)=>setUsers(prev=>prev.map(u=>u.id!==id?u: {...u, active:!u.active}))
+  const handleToggle=useCallback((id)=>setUsers(prev=>prev.map(u=>u.id!==id?u: {...u, active:!u.active})), []);
 
   return (
     <>
