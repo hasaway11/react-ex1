@@ -1,66 +1,30 @@
-import { useState } from "react";
-import { create } from "zustand";
+import './App.css';
 
-const useTodoStore = create((set) => ({
-  todos: [],
-  nextId: 1,
-
-  addTodo: (title) =>
-    set((state) => ({
-      todos: [...state.todos, { id: state.nextId, title, done: false }],
-      nextId: state.nextId + 1,
-    })),
-
-  toggleTodo: (id) =>
-    set((state) => ({
-      todos: state.todos.map((todo) =>todo.id === id ? { ...todo, done: !todo.done } : todo)
-    })),
-
-  removeTodo: (id) =>
-    set((state) => ({todos: state.todos.filter((todo) => todo.id !== id)})),
-}));
+import { Route, Routes } from "react-router-dom"
+import Footer from "./contacts/fragment/Footer"
+import Header from "./contacts/fragment/Header"
+import Nav from "./contacts/fragment/Nav"
+import ContactList from "./contacts/view/ContactList"
+import ContactRead from "./contacts/view/ContactRead"
+import ContactWrite from "./contacts/view/ContactWrite"
 
 function App() {
-  const { todos, addTodo, toggleTodo, removeTodo } = useTodoStore();
-  const [title, setTitle] = useState('');
-
-  const handleAdd = () => {
-    if (!title.trim()) return;
-    addTodo(title);
-    setTitle('');
-  };
-
   return (
-    <div>
-      <h2>Todo List</h2>
-      <div>
-        <input
-          type="text"
-          placeholder="할 일을 입력하세요"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-        />
-        <button onClick={handleAdd}>추가</button>
-      </div>
-
-      <ul>
-        {todos.map((todo) => (
-          <li key={todo.id}>
-            <span
-              style={{
-                textDecoration: todo.done ? 'line-through' : 'none',
-                cursor: 'pointer',
-              }}
-              onClick={() => toggleTodo(todo.id)}
-            >
-              {todo.id}. {todo.title}
-            </span>
-            <button onClick={() => removeTodo(todo.id)}>삭제</button>
-          </li>
-        ))}
-      </ul>
+    <div className='App'>
+      <Header />
+      <Nav />
+      <main>
+        <section>
+          <Routes>
+            <Route path="/" element={<ContactList/>} />
+            <Route path="/read" element={<ContactRead />} />
+            <Route path="/write" element={<ContactWrite />} />
+          </Routes>
+        </section>
+      </main>
+      <Footer/>
     </div>
-  );
+  )
 }
 
 export default App

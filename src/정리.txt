@@ -88,3 +88,65 @@ useCallback : 값이 바뀌면 → 새 함수 생성
   set({ val: 1 });
 - 동적 갱신 : state라는 이름은 예약어는 아니지만, 이 함수의 첫 번째 인자에 자동으로 현재 상태 객체가 전달되기 때문에 관례적으로 state라고 부름
   set((state) => ({ val: state.val + 1 }));
+
+
+13. 리액트 라우터 v7
+- npm install react-router-dom
+  (웹사이트 npx로 설치하면 일종의 프레임워크로 설치된다)
+
+14. SWR
+- Vercel의 데이터 fetching 라이브러리
+  "오래된 데이터를 먼저 보여주고, 백그라운드에서 새 데이터를 가져온다"
+- 데이터패칭
+  자동상태관리
+    로딩, 에러, 데이터 상태를 자동으로 관리
+    useState, useEffect 보일러플레이트 제거
+  캐싱
+    같은 키로 여러 컴포넌트에서 호출해도 한 번만 요청
+  코드 간결화
+  전역상태 공유(서버 상태 관리에 특화)
+    // ComponentA
+    const {data: user} = useSWR('/api/user', fetcher);
+    // ComponentB (다른 컴포넌트)
+    const {data: user} = useSWR('/api/user', fetcher); // 같은 데이터, 한 번만 요청
+  Mutation 지원
+
+15.
+- SWR은 서버 상태(Server State) 관리에 특화되어 있고, 로그인 여부는 **클라이언트 상태(Client State)**에 가까움
+- 왜 권장하지 않나?
+    불필요한 API 호출 발생
+    로그인은 "변경이 명확한" 클라이언트 상태
+    성능 오버헤드(캐시 확인 → 네트워크 요청)
+- 하이브리드 접근 (권장) ✅
+    javascript// 1. 초기 로그인 상태는 SWR로 확인
+    function App() {
+      const {data: user} = useSWR('/api/auth/me', fetcher, {
+        revalidateOnFocus: false,
+        revalidateOnReconnect: false
+      });
+      
+      useEffect(() => {
+        if (user) {
+          // Zustand에 저장
+          useAuthStore.getState().setUser(user);
+        }
+      }, [user]);
+    }
+
+    // 2. 이후는 Zustand로 관리
+    function Header() {
+      const user = useAuthStore(state => state.user);
+      const logout = useAuthStore(state => state.logout);
+      
+      return user ? <button onClick={logout}>로그아웃</button> : <Link to="/login">로그인</Link>;
+    }
+
+    // Zustand Store
+    const useAuthStore = create((set) => ({
+      user: null,
+      setUser: (user) => set({ user }),
+      logout: () => {
+        api.logout();
+        set({ user: null });
+      }
+    }));
