@@ -5,7 +5,7 @@ export default function Test03() {
   
   return (
     <button onClick={() => setIsOn(!isOn)}>
-      {isOn ? '🔆 켜짐' : '🌙 꺼짐'}
+      {isOn ? '켜짐' : '꺼짐'}
     </button>
   );
 }
