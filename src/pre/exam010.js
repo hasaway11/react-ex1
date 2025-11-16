@@ -1,11 +1,13 @@
-const obj = {
-  irum : '홍길동',
-  nai: 20,
-  address: '제주도'
-};
+const arr = [75, 55, 65, 80, 90];
+const newArr = [...arr, 100];
 
-const newObj1 = {...obj, address:'서울시'};
-const newObj2 = {...obj, nai:30};
+console.log(newArr, arr);
 
-console.log(newObj1);
-console.log(newObj2);
+const users = [
+  {id: 1, username: 'velopert', email: 'public.velopert@gmail.com' },
+  {id: 2, username: 'tester', email: 'tester@example.com'}
+];
+
+// users.push({id: 3, username: 'liz', email: 'liz@example.com'})
+
+const newUsers = [...users, {id: 3, username: 'liz', email: 'liz@example.com'}];
