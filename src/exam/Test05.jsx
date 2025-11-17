@@ -1,21 +1,25 @@
-export default function Test05() {
-  const [src, setSrc] = useState("pic_bulboff.gif");
+import { useState } from "react";
 
-  const turnOn = () => {
-    setSrc("https://www.w3schools.com/js/pic_bulboㅅ.gif");
-  };
+export default function Test04() {
+const [visible, setVisible] = useState(false);
+  const [time, setTime] = useState("");
 
-  const turnOff = () => {
-    setSrc("https://www.w3schools.com/js/pic_bulboff.gif");
+  const handleClick = () => {
+    if (!visible) {
+      setTime(new Date().toString());
+    }
+    setVisible(!visible);
   };
 
   return (
     <div>
+      <h1>My First JavaScript (React)</h1>
 
-      <button onClick={turnOn}>켜기</button>
+      <button onClick={handleClick}>
+        {visible ? "시간 숨기기" : "시간 보기"}
+      </button>
 
-      <img src={src} style={{ width: "100px" }} />
-      <button onClick={turnOff}>끄기</button>
+      {visible && <p>{time}</p>}
     </div>
   );
 }

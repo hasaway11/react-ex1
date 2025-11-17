@@ -6,3 +6,4 @@ console.log(a, b, c);
 // 단축 속성
 const obj = {a, b, c};
 console.log(obj);
+

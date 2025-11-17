@@ -1,11 +1,12 @@
-import React from 'react'
+import { useState } from "react";
 
-export default function Test03() {
-  const [isOn, setIsOn] = useState(false);
+export default function Test02() {
+  const [name, setName] = useState('');
   
   return (
-    <button onClick={() => setIsOn(!isOn)}>
-      {isOn ? '켜짐' : '꺼짐'}
-    </button>
+    <div>
+      <input value={name} onChange={(e) => setName(e.target.value)} placeholder="이름 입력" />
+      <p>안녕하세요, {name}님!</p>
+    </div>
   );
 }

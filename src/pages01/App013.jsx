@@ -5,16 +5,16 @@ function App() {
   let [count, setCount] = useState(1);
   const change1=()=> {
     setVal(val+1);
-    console.log(val);
+    console.log(`val:${val}`);
   }
 
   const change2=()=>{
     val++;
-    console.log(val);
+    console.log(`val:${val}`);
   }
 
   const change3=()=> {
-    setCount(count+1);
+    setCount(`count:${count}`);
   }
 
   return (

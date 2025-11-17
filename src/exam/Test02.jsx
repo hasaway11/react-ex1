@@ -1,16 +1,25 @@
-import React from 'react'
+import { useState } from "react";
 
-export default function Test02() {
-  const [name, setName] = useState('');
+const btnStyle = {
+  splay:'inline-block', 
+  width:'100px'
+}
+
+export default function Test011() {
+  const [count, setCount] = useState(0);
   
+  const minus=()=>{
+    if(count>1)
+      setCount(count-1);
+    else
+      setCount(0);
+  }
   return (
     <div>
-      <input 
-        value={name} 
-        onChange={(e) => setName(e.target.value)} 
-        placeholder="이름 입력"
-      />
-      <p>안녕하세요, {name}님!</p>
+      <p>Count: {count}</p>
+      <button onClick={() => setCount(count + 1)} style={btnStyle}>+</button>
+      <button onClick={minus} style={btnStyle}>-</button>
+      <button onClick={() => setCount(0)} style={btnStyle}>Reset</button>
     </div>
   );
 }
