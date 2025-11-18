@@ -7,8 +7,10 @@ import Nav from "./contacts/fragment/Nav"
 import ContactList from "./contacts/view/ContactList"
 import ContactRead from "./contacts/view/ContactRead"
 import ContactWrite from "./contacts/view/ContactWrite"
-import Test011 from './exam/Test011';
-import Test06 from './exam/test06';
+import Test011 from './exam02/Test011';
+import Exam002 from './exam02/Exam002';
+import Exam004 from './exam02/Exam004';
+import Exam005 from './exam02/Exam005';
 
 
 function App() {
@@ -27,7 +29,7 @@ function App() {
     //   </main>
     //   <Footer/>
     // </div>
-    <Test06 />
+    <Exam005 />
   )
 }
 
