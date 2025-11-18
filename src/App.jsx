@@ -11,6 +11,7 @@ import Test011 from './exam02/Test011';
 import Exam002 from './exam02/Exam002';
 import Exam004 from './exam02/Exam004';
 import Exam005 from './exam02/Exam005';
+import App032 from './exam02/App032';
 
 
 function App() {
@@ -29,7 +30,7 @@ function App() {
     //   </main>
     //   <Footer/>
     // </div>
-    <Exam005 />
+    <App032 />
   )
 }
 
