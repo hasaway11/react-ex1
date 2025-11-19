@@ -8,7 +8,7 @@ function Result({result}) {
 
   return (
     <li className="item"> 
-      {score>=70 ?<del>{name} &#x2705;</del>:<>{name}</>}
+      {score>=70 ?<del>{name}</del>:<>{name}</>}
     </li>
   )
 }

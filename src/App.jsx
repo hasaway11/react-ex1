@@ -15,6 +15,7 @@ import App032 from './exam02/App032';
 import Exam003 from './exam02/Exam003';
 import Test005 from './exam03/Test005';
 import TodosApp from './exam03/TodosApp';
+import Test001 from './exam03/Test001';
 
 
 function App() {

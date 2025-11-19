@@ -150,3 +150,8 @@ useCallback : 값이 바뀌면 → 새 함수 생성
         set({ user: null });
       }
     }));
+
+
+
+    npm install react-bootstrap bootstrap
+    import 'bootstrap/dist/css/bootstrap.min.css';

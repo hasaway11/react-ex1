@@ -1,5 +1,6 @@
 import { useRef, useState } from "react"
 
+// 할일 1건을 담당하는 컴포넌트 : 할일 1건 출력, 삭제버튼 처리, 완료/미완료 처리
 function Todo({todo, handleDelete, handleToggle}) {
   const {tno, title, writeday, finish} = todo;
   return (
@@ -17,9 +18,11 @@ function Todo({todo, handleDelete, handleToggle}) {
   )
 }
 
+// TodoApp과 Todo 사이에 위치한 컴포넌트
+// TodoApp에서 내려받은 이벤트 핸들러를 Todo에 전달한다
 function TodoList({todos, handleDelete, handleToggle}) {
   return (
-    <table className="table table-border">
+    <table className="table table-border mt-4">
       <colgroup>
         <col style={{width:'10%'}}/>
         <col style={{width:'50%'}}/>
@@ -43,15 +46,19 @@ function TodoList({todos, handleDelete, handleToggle}) {
   )
 }
 
+// Todo를 등록하는 컴포넌트
 function CreateTodo({handleChange, handleAdd}) {
   const titleRef = useRef(null);
 
   const handleClick=()=>{
+    // 할일을 입력하지 않았으면 함수 종료
+    if(titleRef.current.value==='') 
+      return;
     handleAdd();
     titleRef.current.value='';
   }
   return (
-    <>
+    <div className="mt-3 mb-3" style={{borderBottom:'1px solid gray'}}>
       <div className="mt-3 mb-3">
         <label className="form-label">할일:</label>
         <input className="form-control" name="title" onChange={handleChange} ref={titleRef} placeholder="할일을 입력하세요"/>
@@ -59,8 +66,19 @@ function CreateTodo({handleChange, handleAdd}) {
       <div className="mt-3 mb-3 d-grid">
         <button className="btn btn-primary" onClick={handleClick}>추가</button>
       </div>
-      <hr />
-    </>
+    </div>
+  )
+}
+
+// 할일 건수, 완료된 할일 건수, 작업중 할일 건수를 계산해 출력하는 컴포넌트
+function Stat({todos}) {
+  const totalTodoCount = todos.length;
+  const finishedTodoCount = todos.filter(todo=>todo.finish).length;
+  const remainingTodoCount = totalTodoCount - finishedTodoCount;
+  return (
+    <div class="alert alert-success">
+      <strong>할일 {totalTodoCount}건</strong> - 완료 {finishedTodoCount}건 / 작업중 {remainingTodoCount}건
+    </div>
   )
 }
 
@@ -72,6 +90,7 @@ function TodosApp() {
   const handleChange=(e)=>setTitle(e.target.value);
 
   const handleAdd=()=>{
+    // JSX는 객체를 출력할 수 없다 -> Date객체 대신 날짜를 문자열로 바꿔서 저장
     const newTodo = {tno:tnoRef.current++, title:title, writeday:new Date().toLocaleDateString(), finish:false};
     setTodos(prev=>[...prev, newTodo]);
   }
@@ -85,15 +104,10 @@ function TodosApp() {
   return (
     <div>
       <CreateTodo handleChange={handleChange} handleAdd={handleAdd} />
+      <Stat todos={todos} />
       <TodoList todos={todos} handleDelete={handleDelete} handleToggle={handleToggle} />
     </div>
   )
 }
 
 export default TodosApp
-
-
-/*
-  1. new Date()로 하면 object를 출력못한다
-  2. key 지정
-*/
