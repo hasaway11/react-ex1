@@ -1,6 +1,6 @@
 import { useRef, useState } from "react"
 
-function App() {
+function Test002() {
   // { current: null }인 객체를 생성하여 훅 슬롯에 저장
   // 나중에 DOM에서 첫번째 ref를 연결한다
   const inputRef = useRef(null);
@@ -16,4 +16,4 @@ function App() {
   )
 }
 
-export default App
+export default Test002

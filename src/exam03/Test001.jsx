@@ -1,6 +1,6 @@
 import { useRef, useState } from "react"
 
-function App() {
+function Test001() {
   const [val, setVal] = useState(1);
 
   // useRef는 렌더링과 무관하게 값이나 DOM 요소를 기억하기 위한 훅
@@ -18,4 +18,4 @@ function App() {
   )
 }
 
-export default App
+export default Test001

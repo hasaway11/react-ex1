@@ -8,7 +8,7 @@ function Exam003() {
   
   const handleLogin = () => {
     if (email && password) {
-      setMessage(`${email}/${password}로 로그인 시도!`);
+      alert("로그인합니다");
     } else {
       setMessage('이메일과 비밀번호를 입력하세요');
     }
