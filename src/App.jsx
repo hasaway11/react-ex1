@@ -1,10 +1,9 @@
 import './App.css';
 
 import { Route, Routes } from "react-router-dom"
-import Test04 from './exam04/Test04';
-import Test05 from './exam04/Test05';
-import Test06 from './exam04/Test06';
-import Test07 from './exam04/Test07';
+import Test001 from './exam05/Test001';
+import Test002 from './exam05/Test002';
+import Test003 from './exam05/Test003';
 
 
 function App() {
@@ -23,7 +22,10 @@ function App() {
     //   </main>
     //   <Footer/>
     // </div>
-    <Test07 />
+    <Routes>
+      <Route path="/test2" element={<Test002 />} />
+      <Route path="/test3" element={<Test003 />} />
+    </Routes>
   )
 }
 
