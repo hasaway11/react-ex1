@@ -1,21 +1,10 @@
 import './App.css';
 
 import { Route, Routes } from "react-router-dom"
-import Footer from "./contacts/fragment/Footer"
-import Header from "./contacts/fragment/Header"
-import Nav from "./contacts/fragment/Nav"
-import ContactList from "./contacts/view/ContactList"
-import ContactRead from "./contacts/view/ContactRead"
-import ContactWrite from "./contacts/view/ContactWrite"
-import Test011 from './exam02/Test011';
-import Exam002 from './exam02/Exam002';
-import Exam004 from './exam02/Exam004';
-import Exam005 from './exam02/Exam005';
-import App032 from './exam02/App032';
-import Exam003 from './exam02/Exam003';
-import Test005 from './exam03/Test005';
-import TodosApp from './exam03/TodosApp';
-import Test001 from './exam03/Test001';
+import Test04 from './exam04/Test04';
+import Test05 from './exam04/Test05';
+import Test06 from './exam04/Test06';
+import Test07 from './exam04/Test07';
 
 
 function App() {
@@ -34,8 +23,8 @@ function App() {
     //   </main>
     //   <Footer/>
     // </div>
-    <TodosApp />
+    <Test07 />
   )
 }
 
-export default App
+export default App;
