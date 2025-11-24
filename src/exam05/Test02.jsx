@@ -5,6 +5,7 @@ function Test02() {
   console.log("재 렌더링");
   const [value, setValue] = useState(1);
 
+  // React는 동일한 값으로 상태를 세팅하면 렌더링을 발생시키지 않음
   setTimeout(()=>setValue(100), 2000)
 
   return (

@@ -1,13 +1,8 @@
 import './App.css';
 
 import { Route, Routes, useLocation } from "react-router-dom"
-import Test001 from './exam05/Test04';
-import Test002 from './exam05/Test05';
-import Test003 from './exam05/Test003';
 import ContactList from './exam05/ContactList';
-import Test01 from './exam05/Test01';
-import Test02 from './exam05/Test02';
-import Test03 from './exam05/Test03';
+import Test04 from './exam05/Test04';
 import ContactRead from './exam05/ContactRead';
 import PublicRoute from './exam05/route/PublicRoute';
 import ContactLogin from './exam05/ContactLogin';
@@ -27,6 +22,7 @@ function App() {
 
   // 이동할 때마다 인증 정보를 업데이트
   useEffect(()=>{
+    console.log("======================================");
     readLogin()
   }, [location]);  
 
@@ -37,6 +33,7 @@ function App() {
       <main>
         <Routes>
           <Route path="/" element={<ContactList />} />
+          <Route path="/list" element={<ContactList />} />
           <Route path="/read" element={<ContactRead/>} />
           <Route path="/login" element={<PublicRoute element={<ContactLogin/>} />} />
           <Route path="/write" element={<PrivateRoute element={<ContactWrite/>} />} />

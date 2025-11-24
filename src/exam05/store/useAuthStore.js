@@ -5,10 +5,11 @@ const useAuthStore = create((set, get)=>{
     login : undefined,
     readLogin:()=>{
       const login = get().login;
+      console.log(`before : ${login}`);
       if(login===undefined) 
         setTimeout(()=>{
           set(state=>({login:false}));
-          console.log("state update");
+          console.log(`state update : ${login}`);
         }, 1000)
     },
     setLogin:()=>set(state=>({login:true})),
