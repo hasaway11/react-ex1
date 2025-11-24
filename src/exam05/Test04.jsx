@@ -1,6 +1,6 @@
 import useCountStore from './CountStore'
 
-function Test001() {
+function Test02() {
   const {count, inc, dec} = useCountStore();
   return (
     <div>
@@ -11,4 +11,4 @@ function Test001() {
   )
 }
 
-export default Test001
+export default Test02

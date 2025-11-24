@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import useLoginStore from "./useLoginStore";
 
-function Test002() {
+function Test05() {
   const {login, setLogin, setLogout} = useLoginStore();
   const navigate = useNavigate();
 
@@ -15,4 +15,4 @@ function Test002() {
   )
 }
 
-export default Test002
+export default Test05

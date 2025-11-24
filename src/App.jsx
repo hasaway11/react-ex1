@@ -1,31 +1,50 @@
 import './App.css';
 
-import { Route, Routes } from "react-router-dom"
-import Test001 from './exam05/Test001';
-import Test002 from './exam05/Test002';
+import { Route, Routes, useLocation } from "react-router-dom"
+import Test001 from './exam05/Test04';
+import Test002 from './exam05/Test05';
 import Test003 from './exam05/Test003';
+import ContactList from './exam05/ContactList';
+import Test01 from './exam05/Test01';
+import Test02 from './exam05/Test02';
+import Test03 from './exam05/Test03';
+import ContactRead from './exam05/ContactRead';
+import PublicRoute from './exam05/route/PublicRoute';
+import ContactLogin from './exam05/ContactLogin';
+import PrivateRoute from './exam05/route/PrivateRoute';
+import ContactWrite from './exam05/ContactWrite';
+import ContactUpdate from './exam05/ContactUpdate';
+import Header from './exam05/fragments/Header';
+import Nav from './exam05/fragments/Nav';
+import Footer from './exam05/fragments/Footer';
+import { useEffect } from 'react';
+import useAuthStore from './exam05/store/useAuthStore';
 
 
 function App() {
+  const location = useLocation();
+  const {readLogin} = useAuthStore();
+
+  // 이동할 때마다 인증 정보를 업데이트
+  useEffect(()=>{
+    readLogin()
+  }, [location]);  
+
   return (
-    // <div className='App'>
-    //   <Header />
-    //   <Nav />
-    //   <main>
-    //     <section>
-    //       <Routes>
-    //         <Route path="/" element={<ContactList/>} />
-    //         <Route path="/read" element={<ContactRead />} />
-    //         <Route path="/write" element={<ContactWrite />} />
-    //       </Routes>
-    //     </section>
-    //   </main>
-    //   <Footer/>
-    // </div>
-    <Routes>
-      <Route path="/test2" element={<Test002 />} />
-      <Route path="/test3" element={<Test003 />} />
-    </Routes>
+    <div className='App'>
+      <Header />
+      <Nav />
+      <main>
+        <Routes>
+          <Route path="/" element={<ContactList />} />
+          <Route path="/read" element={<ContactRead/>} />
+          <Route path="/login" element={<PublicRoute element={<ContactLogin/>} />} />
+          <Route path="/write" element={<PrivateRoute element={<ContactWrite/>} />} />
+          <Route path="/update" element={<PrivateRoute element={<ContactUpdate/>} />} />
+        </Routes>
+      </main>
+      <Footer />
+    </div>
   )
 }
 
